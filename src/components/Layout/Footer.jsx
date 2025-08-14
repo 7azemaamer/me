@@ -55,7 +55,7 @@ export default function Footer() {
         >
           {/* Terminal header + info */}
           <div class="flex-1 min-w-[200px]">
-            <div class="flex items-center mb-4">
+            <div class="flex items-center mb-4 ">
               <div class="flex space-x-2 mr-4">
                 <div class="w-3 h-3 rounded-full bg-red-500"></div>
                 <div class="w-3 h-3 rounded-full bg-yellow-500"></div>
@@ -64,7 +64,7 @@ export default function Footer() {
               <span class="text-gray-900 text-sm">~/hazem-aamer</span>
             </div>
 
-            <div class="space-y-1 text-sm font-mono">
+            <div class="space-y-1 text-sm">
               <div>
                 <span class="font-bold">role:</span> "Software Engineer"
               </div>
@@ -75,8 +75,8 @@ export default function Footer() {
           </div>
 
           {/* Command + copyright */}
-          <div class="flex flex-col justify-between flex-1 min-w-[200px]">
-            <div class="flex items-center text-sm font-mono mb-4">
+          <div class="flex flex-col justify-between flex-1 min-w-[200px] md:justify-start">
+            <div class="flex items-center text-center md:text-left text-sm mb-4">
               <span class="text-green-400">$</span>
               <span class="ml-2">
                 echo "© {new Date().getFullYear()} - Built with passion"
@@ -87,7 +87,7 @@ export default function Footer() {
             </div>
 
             {/* Links */}
-            <div class="flex gap-6 text-sm text-gray-800 mt-auto font-bold">
+            <div class="flex gap-6 text-sm text-gray-800 mt-auto  text-center font-bold">
               <a href="#" class="hover:text-blue-900 transition-colors">
                 GitHub
               </a>
