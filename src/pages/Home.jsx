@@ -5,6 +5,7 @@ import ExperienceCanvas from "../components/Landing/ExperienceCanvas";
 import Projects from "../components/Landing/Projects";
 import Skills from "../components/Landing/Skills";
 import Testimonials from "../components/Landing/Testimonials";
+import Contact from "../components/Landing/Contact";
 
 export default function Home() {
   return (
@@ -16,6 +17,7 @@ export default function Home() {
       <Projects />
       <Skills />
       <Testimonials />
+      <Contact />
     </div>
   );
 }

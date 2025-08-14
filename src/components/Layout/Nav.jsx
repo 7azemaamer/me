@@ -140,29 +140,31 @@ export default function Nav() {
 
   const links = [
     { title: "Home", href: "/" },
-    { title: "About Me", href: "/about" },
-    { title: "Contact Me", href: "/contact" },
-    { title: "Projects", href: "/projects" },
+    { title: "Reviews", href: "#reviews_sec" },
+    { title: "Contact Me", href: "#contact_sec" },
+    { title: "Projects", href: "#projects_sec" },
   ];
 
   return (
-    <nav class="fixed top-0 left-0 w-full flex justify-between items-center px-8 py-6 z-50 backdrop-blur-xs">
-      {/* Logo */}
+    <nav class="fixed top-0 left-0 w-full flex justify-between items-center px-4 sm:px-8 py-4 sm:py-6 z-50 backdrop-blur-xs">
+      {/* Logo - Responsive */}
       <div class="logo-container">
-        <div class="text-5xl uppercase font-quicksand">
-          <span class="text-6xl font-bold text-primary">H</span>
+        <div class="text-3xl sm:text-5xl uppercase font-quicksand">
+          <span class="text-4xl sm:text-6xl font-bold text-primary">H</span>
           <span class="lowercase">a</span>z<span class="lowercase">e</span>
-          <span class="text-3xl font-semibold">m</span>
+          <span class="text-2xl sm:text-3xl font-semibold">m</span>
         </div>
       </div>
 
-      {/* Buttons */}
-      <div class="flex gap-3 items-center text-2xl">
-        <button class="btn btn-dark nav-button">Let's Talk</button>
+      {/* Buttons  */}
+      <div class="flex gap-2 sm:gap-3 items-center text-lg sm:text-1xl">
+        <a href="#contact_sec" class="btn btn-dark nav-button hidden sm:block">
+          Let's Talk
+        </a>
 
         <div class="relative">
           <button
-            class="btn btn-light nav-button"
+            class="btn btn-light nav-button text-sm sm:text-base px-3 sm:px-4 py-2"
             onClick={() => {
               setIsMenuActive(!isMenuActive());
             }}
@@ -175,17 +177,22 @@ export default function Nav() {
               ref={menuBg}
               onMouseMove={handleMouseMove}
               onMouseLeave={handleMouseLeave}
-              class="absolute top-15 right-4 bg-white shadow-xl border border-gray-100 rounded-2xl mt-2 p-4 flex justify-between gap-4 w-80 z-50"
+              class="absolute top-12 sm:top-15 right-0 sm:right-4 bg-white shadow-xl border border-gray-100 rounded-2xl mt-2 p-4 flex flex-col sm:flex-row justify-between gap-4 w-72 sm:w-80 z-50"
             >
-              <div class="menu-overlay  absolute top-0 left-0 w-full h-full pointer-events-none z-[-1]"></div>
-              <div ref={navLinksRef} class="flex flex-col gap-2 nav-links">
+              <div class="menu-overlay absolute top-0 left-0 w-full h-full pointer-events-none z-[-1]"></div>
+
+              {/* Navigation Links */}
+              <div
+                ref={navLinksRef}
+                class="flex flex-col gap-2 nav-links flex-1"
+              >
                 <For each={links}>
                   {(item) => (
                     <div
-                      class={`nav-item transition duration-200 px-2 py-1 rounded opacity-0 ${
+                      class={`nav-item transition duration-200 px-3 py-2 rounded opacity-0 text-sm sm:text-base ${
                         currentPath() === item.href
                           ? "text-primary font-semibold"
-                          : "text-gray-500 cursor-pointer hover:bg-white hover:rounded-lg"
+                          : "text-gray-500 cursor-pointer hover:bg-gray-50 hover:rounded-lg"
                       }`}
                       onClick={() => {
                         setIsMenuActive(false);
@@ -196,28 +203,56 @@ export default function Nav() {
                     </div>
                   )}
                 </For>
+
+                {/* Show "Let's Talk" in mobile menu */}
+                <div class="sm:hidden border-t border-gray-200 pt-6 mt-2">
+                  <a
+                    href="#contact_sec"
+                    class="nav-item w-full text-left px-3 py-2 text-sm text-primary font-semibold hover:bg-gray-50 hover:rounded-lg opacity-0"
+                    onClick={() => setIsMenuActive(false)}
+                  >
+                    Let's Talk
+                  </a>
+                </div>
               </div>
+
+              {/* Social Icons  */}
               <div
                 ref={socialIconsRef}
-                class="flex flex-col items-center justify-center border-gray-200 border-l-2 pl-5 social-icons"
+                class="flex flex-row sm:flex-col items-center justify-center sm:border-gray-200 sm:border-l-2 sm:pl-5 social-icons gap-2 sm:gap-0 border-t sm:border-t-0 border-gray-200 pt-3 sm:pt-0"
               >
                 <a
-                  class="social-icon hover:bg-white hover:rounded-full px-2 py-1 flex justify-center items-center"
+                  class="social-icon hover:bg-gray-50 hover:rounded-full p-2 flex justify-center items-center"
                   href="#"
                 >
-                  <Icon icon="ion:social-whatsapp" width="50" height="50" />
+                  <Icon
+                    icon="ion:social-whatsapp"
+                    width="32"
+                    height="32"
+                    class="sm:w-[50px] sm:h-[50px]"
+                  />
                 </a>
                 <a
-                  class="social-icon hover:bg-white hover:rounded-full px-2 py-1 flex justify-center items-center"
+                  class="social-icon hover:bg-gray-50 hover:rounded-full p-2 flex justify-center items-center"
                   href="#"
                 >
-                  <Icon icon="ion:social-github" width="50" height="50" />
+                  <Icon
+                    icon="ion:social-github"
+                    width="32"
+                    height="32"
+                    class="sm:w-[50px] sm:h-[50px]"
+                  />
                 </a>
                 <a
-                  class="social-icon hover:bg-white hover:rounded-full px-2 py-1 flex justify-center items-center"
+                  class="social-icon hover:bg-gray-50 hover:rounded-full p-2 flex justify-center items-center"
                   href="#"
                 >
-                  <Icon icon="mingcute:social-x-line" width="50" height="50" />
+                  <Icon
+                    icon="mingcute:social-x-line"
+                    width="32"
+                    height="32"
+                    class="sm:w-[50px] sm:h-[50px]"
+                  />
                 </a>
               </div>
             </div>

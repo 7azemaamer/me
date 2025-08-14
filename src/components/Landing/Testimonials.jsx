@@ -1,4 +1,4 @@
-import { onMount, onCleanup } from "solid-js";
+import { onMount, onCleanup, createSignal } from "solid-js";
 import { For } from "solid-js";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -12,27 +12,87 @@ export default function Testimonials() {
     starRefs = [];
   let tl, starTl;
 
+  const [currentPage, setCurrentPage] = createSignal(0);
+  const [showAll, setShowAll] = createSignal(false);
+  const itemsPerPage = 6;
+
   const testimonials = [
     {
-      text: "exceptional.execution()",
+      text: "flawless.delivery()",
       description:
-        "Built our entire e-commerce platform from scratch. Clean architecture, zero downtime.",
-      name: "sarah_chen",
-      rating: 5
+        "May God bless your hands, my friend. We will have many future projects together, God willing. Highly recommended!",
+      name: "Hisham K.",
+      rating: 5,
     },
     {
-      text: "beyond.expectations++",
+      text: "fast_and_perfect()",
       description:
-        "Delivered complex automation system ahead of schedule. Perfect code quality.",
-      name: "marcus_rodriguez",
-      rating: 5
+        "Honestly, one of the best programmers I’ve worked with. Fast completion, 100% precision, and understands your ideas before you finish explaining. Thank you, engineer Hazem.",
+      name: "Khaled A.",
+      rating: 5,
     },
     {
-      text: "pure_excellence.deploy()",
+      text: "patient.and_committed()",
       description:
-        "Transformed our legacy system into modern scalable architecture. Incredible work.",
-      name: "ahmed_mansouri",
-      rating: 5
+        "I have programming knowledge and worked with Hazem on multiple projects. He’s meticulous, patient, and provides service even after delivery. I’ll definitely work with him again.",
+      name: "Turki A.",
+      rating: 5,
+    },
+    {
+      text: "above_expectations()",
+      description:
+        "Delivered a beautiful, professional site. Accepted many revisions with great patience and commitment to deadlines. Highly recommended.",
+      name: "Ahmed S.",
+      rating: 5,
+    },
+    {
+      text: "solutions_on_point()",
+      description:
+        "An excellent, dedicated young man who quickly understands and delivers solutions. We’ll definitely work together again.",
+      name: "Yusuf I.",
+      rating: 5,
+    },
+    {
+      text: "top_quality.service()",
+      description:
+        "One of the best I’ve worked with. Highly recommended without hesitation.",
+      name: "Mohammed A.",
+      rating: 5,
+    },
+    {
+      text: "responsive.and_skilled()",
+      description:
+        "Accurate, highly responsive, and able to understand every detail. Thank you Hazem, I will definitely work with you again.",
+      name: "Abdulrahman A.",
+      rating: 5,
+    },
+    {
+      text: "creative_and_reliable()",
+      description:
+        "Hazem did an outstanding, professional job designing our WordPress homepage.",
+      name: "Abdullah A.",
+      rating: 5,
+    },
+    {
+      text: "fast_response()",
+      description:
+        "Professional, quick response, and great cooperation. Looking forward to more projects together.",
+      name: "Doaa A.",
+      rating: 5,
+    },
+    {
+      text: "highly_recommended()",
+      description:
+        "Highly recommend working with him. Excellent experience from start to finish.",
+      name: "Turki A.",
+      rating: 5,
+    },
+    {
+      text: "professional.timing()",
+      description:
+        "Thank you engineer Hazem for your professionalism and accurate delivery.",
+      name: "Ahmad A.",
+      rating: 5,
     },
   ];
 
@@ -40,7 +100,6 @@ export default function Testimonials() {
     const mm = gsap.matchMedia();
 
     mm.add("(prefers-reduced-motion: no-preference)", () => {
-      // Initial state - everything hidden
       gsap.set([titleRef, ...cardRefs], { opacity: 0 });
       gsap.set(titleRef, { y: 20, scaleX: 0.8 });
       gsap.set(cardRefs, { opacity: 0, y: 30 });
@@ -91,7 +150,6 @@ export default function Testimonials() {
         },
       });
 
-      // Futuristic hover effects
       cardRefs.forEach((card) => {
         if (card) {
           card.addEventListener("mouseenter", () => {
@@ -148,9 +206,9 @@ export default function Testimonials() {
   return (
     <section
       ref={(el) => (sectionRef = el)}
+      id="reviews_sec"
       class="py-32 relative overflow-hidden"
     >
-      {/* Minimal Stars */}
       <For each={Array.from({ length: 6 })}>
         {(_, index) => (
           <div
@@ -167,17 +225,38 @@ export default function Testimonials() {
       </For>
 
       <div class="max-w-3xl mx-auto px-6">
-        {/* Futuristic Title */}
         <h2
           ref={(el) => (titleRef = el)}
-          class="text-4xl text-center mb-24 tracking-wider"
+          class="text-4xl md:text-6xl text-center  mb-20 font-bold"
         >
-          &gt; client.feedback_
+          client.feedback
         </h2>
 
-        {/* Code-like Testimonials */}
-        <div class="space-y-12 ">
-          <For each={testimonials}>
+        {/* Stats Bar */}
+        <div class="mb-12 flex justify-center items-center space-x-8 text-sm ">
+          <div class="text-black/90/60">
+            total_reviews:{" "}
+            <span class="text-black/90">{testimonials.length}</span>
+          </div>
+          <div class="text-black/90/60">
+            avg_rating: <span class="text-black/90">5.0</span>
+          </div>
+          <div class="text-black/90/60">
+            showing:{" "}
+            <span class="text-black/90">
+              {showAll()
+                ? testimonials.length
+                : Math.min(itemsPerPage, testimonials.length)}
+            </span>
+          </div>
+        </div>
+
+        <div class="space-y-12">
+          <For
+            each={
+              showAll() ? testimonials : testimonials.slice(0, itemsPerPage)
+            }
+          >
             {(testimonial, index) => (
               <div
                 ref={(el) => (cardRefs[index()] = el)}
@@ -185,26 +264,33 @@ export default function Testimonials() {
               >
                 {/* Terminal prompt */}
                 <div class="flex items-start space-x-4">
-                  <span class=" text-sm mt-1">
-                    {String(index() + 1).padStart(2, "0")}
+                  <span class="text-black/90/40 text-sm mt-1 ">
+                    {String((showAll() ? index() : index()) + 1).padStart(
+                      2,
+                      "0"
+                    )}
                   </span>
                   <div class="flex-1">
-                    <div class="text-lg mb-3 group-hover:text-gray-800 transition-colors">
+                    <div class="text-black/90 text-lg mb-3 group-hover:text-gray-900 transition-colors font-bold">
                       {testimonial.text}
                     </div>
-                    <div class="text-sm mb-3 leading-relaxed">
+                    <div class="text-black/90/70 text-sm mb-3 leading-relaxed">
                       {testimonial.description}
                     </div>
                     <div class="flex items-center justify-between">
-                      <div class=" text-xs">// {testimonial.name}</div>
+                      <div class="text-black/90/50 text-xs">
+                        // {testimonial.name}
+                      </div>
                       <div class="text-xs">
                         {Array.from({ length: testimonial.rating }, (_, i) => (
-                          <span class="text-white/60">★</span>
+                          <span class="text-black/90/60">★</span>
                         ))}
                       </div>
                     </div>
                   </div>
-                  <div class=" text-xs">[verified]</div>
+                  <div class="text-black/90/30 font-bold text-xs">
+                    [verified]
+                  </div>
                 </div>
 
                 {/* Subtle line */}
@@ -213,6 +299,22 @@ export default function Testimonials() {
             )}
           </For>
         </div>
+
+        {/* Load More / Show Less Button */}
+        {testimonials.length > itemsPerPage && (
+          <div class="mt-16 text-center">
+            <button
+              onClick={() => setShowAll(!showAll())}
+              class=" text-sm font-bold border border-white/20 px-6 py-3 hover:bg-white/5 transition-all duration-300 hover:border-white/40"
+            >
+              {showAll()
+                ? `> hide_reviews() // showing ${testimonials.length}`
+                : `> load_more() // +${
+                    testimonials.length - itemsPerPage
+                  } more`}
+            </button>
+          </div>
+        )}
       </div>
     </section>
   );

@@ -16,59 +16,79 @@ export default function Projects() {
 
   const projects = [
     {
-      name: "neural-network",
-      lang: "py",
-      status: "active",
-      commits: "247",
-      description:
-        "Deep learning model for image recognition with 94% accuracy",
-      fullDescription:
-        "Advanced convolutional neural network implementing ResNet architecture with custom attention mechanisms. Achieved 94.2% accuracy on ImageNet validation set. Features data augmentation, dropout regularization, and learning rate scheduling.",
-      tech: ["TensorFlow", "Python", "CUDA", "NumPy", "OpenCV"],
-      metrics: { accuracy: "94.2%", speed: "12ms", size: "4.2MB" },
-      features: [
-        "Real-time inference",
-        "GPU acceleration",
-        "Batch processing",
-        "Model compression",
-      ],
-      link: "https://github.com/username/neural-network",
-    },
-    {
-      name: "crypto-trader",
-      lang: "rs",
-      status: "building",
-      commits: "89",
-      description: "High-frequency trading bot with risk management algorithms",
-      fullDescription:
-        "Ultra-low latency trading system built in Rust with microsecond order execution. Implements sophisticated risk management, portfolio optimization, and market-making strategies across multiple exchanges.",
-      tech: ["Rust", "WebSocket", "Redis", "PostgreSQL", "Docker"],
-      metrics: { latency: "<50μs", uptime: "99.9%", profit: "+127%" },
-      features: [
-        "Risk management",
-        "Multi-exchange",
-        "Real-time analytics",
-        "Automated rebalancing",
-      ],
-      link: "https://github.com/username/crypto-trader",
-    },
-    {
-      name: "web-scraper",
+      name: "spe-whats",
       lang: "js",
       status: "shipped",
-      commits: "156",
-      description: "Distributed scraping system processing 10M+ pages daily",
+      commits: "320+",
+      description:
+        "Dynamic MERN stack CMS with live content editing and full admin control",
       fullDescription:
-        "Scalable web scraping infrastructure handling 10M+ pages daily with intelligent rate limiting, proxy rotation, and anti-detection mechanisms. Built on Node.js cluster architecture with Redis queue management.",
-      tech: ["Node.js", "Puppeteer", "MongoDB", "Redis", "AWS"],
-      metrics: { throughput: "10M+/day", success: "98.7%", cost: "$12/M" },
-      features: [
-        "Proxy rotation",
-        "CAPTCHA solving",
-        "Data validation",
-        "Auto-retry logic",
+        "A full-featured content management system with complete admin control over pages, articles, and SEO settings. Features live content editing, responsive UI, and optimized performance. Built with a custom React + Vite dashboard and Next.js frontend.",
+      tech: [
+        "Node.js",
+        "Next.js",
+        "React",
+        "Vite",
+        "Styled Components",
+        "MongoDB",
       ],
-      link: "https://github.com/username/web-scraper",
+      metrics: {
+        uptime: "99.9%",
+        SEO: "Optimized",
+        dynamic: "it has dashboard",
+      },
+      features: [
+        "Full admin control",
+        "SEO optimization",
+        "Live content editing",
+        "Responsive design",
+      ],
+      link: "https://spe-whats.com",
+    },
+    {
+      name: "WASender",
+      lang: "js",
+      status: "active",
+      commits: "500+",
+      description:
+        "Smart WhatsApp automation Chrome extension with campaign management",
+      fullDescription:
+        "Powerful WhatsApp automation tool supporting bulk messaging, Excel-based variable injection, AI-powered auto-replies, group management, and campaign templates. Includes a full admin dashboard for subscription and user management.",
+      tech: [
+        "JavaScript",
+        "React",
+        "Node.js",
+        "WPPConnect API",
+        "Chrome Extension APIs",
+        "MongoDB",
+      ],
+      metrics: { throughput: "50K+ msgs/month", saas: "True", users: "50+" },
+      features: [
+        "Bulk messaging",
+        "Dynamic personalization",
+        "Conditional logic",
+        "Campaign analytics",
+        "AI auto reply",
+      ],
+      link: "https://chromewebstore.google.com/detail/wa-smart-sender/ckibonklempheenficakknnojmemhhcj?hl=en",
+    },
+    {
+      name: "ZOHU",
+      lang: "js",
+      status: "shipped",
+      commits: "210+",
+      description: "High-performance eCommerce platform inspired by Salla.sa",
+      fullDescription:
+        "Custom-built eCommerce frontend optimized for speed, mobile-first experience, and accessibility. Features product management, optimized checkout, and admin dashboard integration. Built using Next.js and TailwindCSS.",
+      tech: ["Next.js", "TailwindCSS", "React", "Node.js", "MongoDB"],
+      metrics: {},
+      features: [
+        "Mobile-first design",
+        "Optimized checkout",
+        "Performance tuning",
+        "Admin dashboard",
+      ],
+      link: "https://fun-cottage.com",
     },
   ];
 
@@ -200,7 +220,7 @@ export default function Projects() {
   };
 
   return (
-    <section ref={(el) => (sectionRef = el)} class="py-32  overflow-hidden">
+    <section ref={(el) => (sectionRef = el)} class="py-32  overflow-hidden" id="projects_sec">
       <div class="max-w-4xl mx-auto px-6">
         <div class="mb-12">
           <div class="flex items-center mb-6">
@@ -297,14 +317,16 @@ export default function Projects() {
                         </div>
 
                         {/* Metrics grid */}
-                        <div class="grid grid-cols-3 gap-4">
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
                           <For each={Object.entries(project.metrics)}>
                             {([key, value]) => (
                               <div class="bg-black/60 border border-green-400/20 p-3 rounded">
                                 <div class="text-white text-xs uppercase mb-1">
                                   {key}
                                 </div>
-                                <div class="text-white font-bold">{value}</div>
+                                <div class="text-white font-bold capitalize">
+                                  {value}
+                                </div>
                               </div>
                             )}
                           </For>

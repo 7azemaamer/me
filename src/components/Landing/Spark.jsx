@@ -103,7 +103,7 @@ export default function Spark() {
       {/* Glow Background */}
       <div
         ref={(el) => (glowRef = el)}
-        class="absolute w-[400px] h-[400px] rounded-full bg-gray-200 blur-3xl opacity-50"
+        class="absolute w-[100px] h-[100px] md:w-[400px] md:h-[400px] rounded-full bg-gray-200 blur-3xl opacity-50"
         style={{ top: "50%", left: "50%", transform: "translate(-50%, -50%)" }}
       ></div>
 
@@ -135,7 +135,7 @@ export default function Spark() {
         <h3
           ref={(el) => (subtitleRef = el)}
           id="how-it-started"
-          class="text-lg sm:text-xl md:text-2xl text-neutral-600 mb-8 font-medium"
+          class="text-lg sm:text-xl md:text-2xl text-neutral-600 md:mb-8 font-medium"
         >
           {subheadline}
         </h3>

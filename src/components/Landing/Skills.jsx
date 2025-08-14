@@ -1,4 +1,4 @@
-import { onMount, onCleanup } from "solid-js";
+import { onMount } from "solid-js";
 import { For } from "solid-js";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -14,7 +14,7 @@ export default function Skills() {
   const skillGroups = [
     {
       name: "Frontend",
-      color: "text-blue-400",
+      color: "text-blue-300",
       skills: [
         "React",
         "SolidJS",
@@ -30,12 +30,12 @@ export default function Skills() {
     },
     {
       name: "Backend",
-      color: "text-green-400",
+      color: "text-green-300",
       skills: ["Node.js", "SQL", "REST APIs", "GraphQL"],
     },
     {
       name: "E-Commerce",
-      color: "text-emerald-400",
+      color: "text-emerald-300",
       skills: [
         "Shopify",
         "Salla",
@@ -47,7 +47,7 @@ export default function Skills() {
     },
     {
       name: "Automations",
-      color: "text-yellow-400",
+      color: "text-yellow-300",
       skills: [
         "n8n",
         "Browser Automation",
@@ -117,7 +117,7 @@ export default function Skills() {
     skillGroups.forEach((group, groupIndex) => {
       const groupRadius = 100 + groupIndex * 35;
       const groupSpeed = 20 + groupIndex * 5;
-      const direction = groupIndex % 2 === 0 ? 1 : -1; // Alternate directions
+      const direction = groupIndex % 2 === 0 ? 1 : -1;
 
       group.skills.forEach((skill, skillIndex) => {
         const totalSkillIndex =
@@ -130,7 +130,6 @@ export default function Skills() {
           const angleStep = 360 / group.skills.length;
           const currentAngle = skillIndex * angleStep + groupIndex * 25;
 
-          // Animate rotation around center
           orbitTl.to(
             ref,
             {
@@ -168,13 +167,12 @@ export default function Skills() {
         {/* Title */}
         <h2
           ref={(el) => (titleRef = el)}
-          class="text-6xl font-[300] mb-20 font-mono"
+          class="text-4xl md:text-6xl  mb-20 font-bold"
         >
           The Tools I Use
         </h2>
 
         <div class="relative flex justify-center items-center min-h-[500px]">
-          {/* Orbiting Skills - Start positioned in orbits */}
           <For each={skillGroups}>
             {(group, groupIndex) => (
               <For each={group.skills}>
@@ -184,14 +182,14 @@ export default function Skills() {
                       .slice(0, groupIndex())
                       .reduce((sum, g) => sum + g.skills.length, 0) +
                     skillIndex();
-                  const groupRadius = 100 + groupIndex() * 35; // Tighter orbits
+                  const groupRadius = 100 + groupIndex() * 35;
                   const angleStep = 360 / group.skills.length;
-                  const angle = skillIndex() * angleStep + groupIndex() * 25; // Offset each group
+                  const angle = skillIndex() * angleStep + groupIndex() * 25;
 
                   return (
                     <div
                       ref={(el) => (skillRefs[totalSkillIndex] = el)}
-                      class={`absolute ${group.color} font-mono text-xs bg-black/90 px-3 py-1.5 rounded-full border border-current/30 backdrop-blur-sm cursor-pointer hover:scale-110 transition-all group`}
+                      class={`absolute ${group.color}  text-xs bg-black px-3 py-1.5 rounded-full border border-current/30 backdrop-blur-sm cursor-pointer hover:scale-110 transition-all group`}
                       style={`
                         left: calc(50% + ${
                           Math.cos((angle * Math.PI) / 180) * groupRadius
@@ -206,7 +204,6 @@ export default function Skills() {
                         {skill}
                       </span>
 
-                      {/* Group label tooltip */}
                       <div class="absolute -top-8 left-1/2 -translate-x-1/2 bg-black/90 px-2 py-1 rounded text-xs opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">
                         {group.name}
                       </div>
@@ -217,7 +214,6 @@ export default function Skills() {
             )}
           </For>
 
-          {/* Orbital rings showing skill groups */}
           <For each={skillGroups}>
             {(group, index) => {
               const radius = 100 + index() * 35;
@@ -237,7 +233,7 @@ export default function Skills() {
         </div>
 
         {/* Skill Groups Legend */}
-        <div class="mt-16 flex flex-wrap justify-center gap-6 text-sm font-mono">
+        <div class="mt-16 flex flex-wrap justify-center gap-6 text-sm ">
           <For each={skillGroups}>
             {(group) => (
               <div class="flex items-center space-x-2">
@@ -251,7 +247,7 @@ export default function Skills() {
         </div>
 
         {/* Stats */}
-        <div class="mt-12 grid grid-cols-3 gap-8 max-w-md mx-auto text-center font-mono">
+        <div class="mt-12 grid grid-cols-3 gap-8 max-w-md mx-auto text-center">
           <div>
             <div class="text-2xl font-bold text-green-400">
               {allSkills.length}+
