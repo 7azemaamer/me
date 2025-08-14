@@ -70,19 +70,50 @@ export default function Hero() {
     };
   });
 
-  const split = (text) =>
-    text.split("").map((ch) => (
-      <span
-        class="letter inline-block will-change-transform"
-        style="filter:blur(6px)"
-      >
-        {ch === " " ? "\u00A0" : ch}
-      </span>
-    ));
+  const split = (text) => {
+    const words = text.split(" ");
+
+    return words
+      .map((word, wordIndex) => {
+        return [
+          ...word.split("").map((ch, charIndex) => {
+            if (wordIndex === words.length - 1 && ch.toLowerCase() === "g") {
+              return (
+                <span
+                  class="letter inline-block will-change-transform"
+                  style="filter:blur(6px)"
+                  id="beginning-word"
+                >
+                  {ch}
+                </span>
+              );
+            }
+            return (
+              <span
+                class="letter inline-block will-change-transform"
+                style="filter:blur(6px)"
+              >
+                {ch}
+              </span>
+            );
+          }),
+          wordIndex < words.length - 1 ? (
+            <span
+              class="letter inline-block will-change-transform"
+              style="filter:blur(6px)"
+            >
+              {"\u00A0"}
+            </span>
+          ) : null,
+        ];
+      })
+      .flat()
+      .filter(Boolean);
+  };
 
   return (
     <section
-      class="relative md:min-h-[600px] bg-white text-neutral-900 flex items-center justify-center overflow-hidden"
+      class="relative min-h-screen translate-x-0 text-neutral-900 flex items-center justify-center overflow-hidden"
       aria-label="Intro"
     >
       {/* Soft colored glow */}

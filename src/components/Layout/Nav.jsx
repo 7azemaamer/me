@@ -146,7 +146,7 @@ export default function Nav() {
   ];
 
   return (
-    <nav class="w-full flex justify-between items-center px-8 py-6">
+    <nav class="fixed top-0 left-0 w-full flex justify-between items-center px-8 py-6 z-50 backdrop-blur-xs">
       {/* Logo */}
       <div class="logo-container">
         <div class="text-5xl uppercase font-quicksand">
