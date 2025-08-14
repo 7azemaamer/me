@@ -46,7 +46,7 @@ export default function Projects() {
       link: "https://spe-whats.com",
     },
     {
-      name: "WASender",
+      name: "WA Samrt Sender",
       lang: "js",
       status: "active",
       commits: "500+",
@@ -89,6 +89,54 @@ export default function Projects() {
         "Admin dashboard",
       ],
       link: "https://fun-cottage.com",
+    },
+    {
+      name: "Maze Bundler",
+      lang: "js",
+      status: "active",
+      commits: "150+",
+      description:
+        "Shopify app for creating advanced product bundles with gifts and discounts",
+      fullDescription:
+        "A Shopify app that enables store owners to create flexible bundle offers with tiered discounts and free gifts. Supports custom checkout flows, embedded Shopify admin dashboards, and integration with Shopify App Blocks for easy placement. Includes analytics for sales tracking and bundle performance.",
+      tech: ["Node.js", "React", "Next.js", "Shopify API", "MongoDB"],
+      metrics: { stores: "Multi-store support", uptime: "99.9%" },
+      features: [
+        "Custom bundle creation",
+        "Free gift logic",
+        "Embedded Shopify admin",
+        "Custom checkout API",
+        "Sales analytics",
+      ],
+      link: "https://apps.shopify.com",
+    },
+    {
+      name: "Cartat Campaign Manager",
+      lang: "js",
+      status: "shipped",
+      commits: "200+",
+      description:
+        "WhatsApp automation platform integrated with Salla & Shopify",
+      fullDescription:
+        "An advanced automation platform connected to Cartat’s WhatsApp messaging API, allowing businesses to launch marketing campaigns, send review requests, auto-reply to customers, and distribute unique discount codes. Fully integrated with Salla and Shopify to sync clients, orders, and messaging triggers.",
+      tech: [
+        "Node.js",
+        "React",
+        "Next.js",
+        "MongoDB",
+        "Cartat API",
+        "Shopify API",
+        "Salla API",
+      ],
+      metrics: { throughput: "100K+ msgs/month", users: "Multi-store support" },
+      features: [
+        "Automated campaign launches",
+        "AI-powered replies",
+        "Discount code generation",
+        "Order & client sync",
+        "Queue-based safe sending",
+      ],
+      link: "#",
     },
   ];
 
@@ -133,7 +181,6 @@ export default function Projects() {
         },
       });
 
-      // Set initial state for detail panels - completely hidden
       gsap.set(detailRefs, {
         height: 0,
         opacity: 0,
@@ -144,7 +191,6 @@ export default function Projects() {
 
       const handleProjectClick = (index) => {
         if (expandedProject() === index) {
-          // Collapse if already expanded
           setExpandedProject(null);
           gsap.to(detailRefs[index], {
             height: 0,
@@ -154,7 +200,6 @@ export default function Projects() {
             ease: "power2.inOut",
           });
         } else {
-          // Collapse any currently expanded project
           if (expandedProject() !== null) {
             gsap.to(detailRefs[expandedProject()], {
               height: 0,
@@ -220,7 +265,11 @@ export default function Projects() {
   };
 
   return (
-    <section ref={(el) => (sectionRef = el)} class="py-32  overflow-hidden" id="projects_sec">
+    <section
+      ref={(el) => (sectionRef = el)}
+      class="py-32  overflow-hidden"
+      id="projects_sec"
+    >
       <div class="max-w-4xl mx-auto px-6">
         <div class="mb-12">
           <div class="flex items-center mb-6">
@@ -289,7 +338,7 @@ export default function Projects() {
                       style="height: 0; transform-origin: top; transform: scaleY(0); opacity: 0;"
                     >
                       {/* Terminal header */}
-                      <div class="bg-black/80 border-b border-green-700/20 px-4 py-2 flex items-center justify-between rounded">
+                      <div class="bg-black/80 border-b border-green-700/20 px-4 py-2 flex flex-col md:flex-row gap-2 md:items-center justify-between rounded">
                         <div class="flex items-center space-x-3">
                           <div class="flex space-x-1">
                             <div class="w-2 h-2 rounded-full bg-red-500"></div>
