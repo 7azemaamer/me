@@ -17,9 +17,11 @@ export default function Projects() {
   const projects = [
     {
       name: "spe-whats",
+      type: "CMS Platform",
       lang: "js",
       status: "shipped",
       commits: "320+",
+      artwork: "/images/projects/spe-whats.png",
       description:
         "Dynamic MERN stack CMS with live content editing and full admin control",
       fullDescription:
@@ -35,7 +37,7 @@ export default function Projects() {
       metrics: {
         uptime: "99.9%",
         SEO: "Optimized",
-        dynamic: "it has dashboard",
+        dynamic: "It has dashboard",
       },
       features: [
         "Full admin control",
@@ -44,12 +46,21 @@ export default function Projects() {
         "Responsive design",
       ],
       link: "https://spe-whats.com",
+      gallery: [
+        "/images/projects/spe/g1.png",
+        "/images/projects/spe/g2.png",
+        "/images/projects/spe/g3.png",
+        "/images/projects/spe/dash.png",
+        "/images/projects/spe/dash2.png",
+      ],
     },
     {
-      name: "WA Samrt Sender",
+      name: "WA Smart Sender",
+      type: "Chrome Extension",
       lang: "js",
       status: "active",
       commits: "500+",
+      artwork: "/images/projects/wa-smart-sender.png",
       description:
         "Smart WhatsApp automation Chrome extension with campaign management",
       fullDescription:
@@ -71,12 +82,20 @@ export default function Projects() {
         "AI auto reply",
       ],
       link: "https://chromewebstore.google.com/detail/wa-smart-sender/ckibonklempheenficakknnojmemhhcj?hl=en",
+      gallery: [
+        "/images/projects/was/3.jpg",
+        "/images/projects/was/1.png",
+        "/images/projects/was/2.jpg",
+        "/images/projects/was/4.jpg",
+      ],
     },
     {
       name: "ZOHU",
+      type: "eCommerce",
       lang: "js",
       status: "shipped",
       commits: "210+",
+      artwork: "/images/projects/zuho.png",
       description: "High-performance eCommerce platform inspired by Salla.sa",
       fullDescription:
         "Custom-built eCommerce frontend optimized for speed, mobile-first experience, and accessibility. Features product management, optimized checkout, and admin dashboard integration. Built using Next.js and TailwindCSS.",
@@ -92,9 +111,11 @@ export default function Projects() {
     },
     {
       name: "Maze Bundler",
+      type: "Shopify App",
       lang: "js",
       status: "active",
       commits: "150+",
+      artwork: "/images/projects/maze-bundler.png",
       description:
         "Shopify app for creating advanced product bundles with gifts and discounts",
       fullDescription:
@@ -109,16 +130,23 @@ export default function Projects() {
         "Sales analytics",
       ],
       link: "https://apps.shopify.com",
+      gallery: [
+        "/images/projects/maze/1.png",
+        "/images/projects/maze/2.png",
+        "/images/projects/maze/3.png",
+      ],
     },
     {
       name: "Cartat Campaign Manager",
+      type: "Shopify Automation App",
       lang: "js",
       status: "shipped",
       commits: "200+",
+      artwork: "/images/projects/cartat.png",
       description:
         "WhatsApp automation platform integrated with Salla & Shopify",
       fullDescription:
-        "An advanced automation platform connected to Cartat’s WhatsApp messaging API, allowing businesses to launch marketing campaigns, send review requests, auto-reply to customers, and distribute unique discount codes. Fully integrated with Salla and Shopify to sync clients, orders, and messaging triggers.",
+        "An advanced automation platform connected to Cartat's WhatsApp messaging API, allowing businesses to launch marketing campaigns, send review requests, auto-reply to customers, and distribute unique discount codes. Fully integrated with Salla and Shopify to sync clients, orders, and messaging triggers.",
       tech: [
         "Node.js",
         "React",
@@ -138,6 +166,65 @@ export default function Projects() {
       ],
       link: "#",
     },
+    {
+      name: "Cravio Restaurant Ordering",
+      type: "Next.js Web App",
+      lang: "js",
+      status: "shipped",
+      commits: "100+",
+      artwork: "/images/projects/cravio.png",
+      description:
+        "Dynamic restaurant ordering system with multi-restaurant support",
+      fullDescription:
+        "A Next.js web app integrated with a backend to manage multiple restaurants. Each restaurant has a unique menu, banners, logos, and dynamic content. Users can browse categories, view popular dishes, and add items to cart with live subtotal calculation.",
+      tech: ["Next.js", "React", , "bootstrap / Pure CSS"],
+      metrics: {
+        restaurants: "Multi-restaurant support",
+        dynamic: "Full admin control",
+      },
+      features: [
+        "Dynamic menu per restaurant",
+        "Custom banners and logos",
+        "Category-based navigation",
+        "Cart and checkout integration",
+        "Responsive design",
+      ],
+      link: "https://order.cravio.ai/?restaurant=3",
+      gallery: [
+        "/images/projects/cravio/c1.png",
+        "/images/projects/cravio/c2.png",
+        "/images/projects/cravio/c3.png",
+      ],
+    },
+    {
+      name: "Ride Theme Customization",
+      type: "Shopify Theme Customization",
+      lang: "Liquid / JS / CSS",
+      status: "shipped",
+      commits: "50+",
+      artwork: "/images/projects/theme.png",
+      description: "Full Shopify store identity overhaul using Ride theme.",
+      fullDescription:
+        "Customized the Ride Shopify theme to create a unique brand identity. This included color scheme updates, hero banner redesign, typography adjustments, layout modifications, and dynamic product presentation. Implemented using Liquid templates, CSS, JavaScript, and Shopify APIs. Ensured responsive design and optimized UX for better conversion.",
+      tech: ["Liquid", "JavaScript", "CSS", "Shopify APIs"],
+      metrics: {
+        responsiveness: "100% mobile-friendly",
+        performance: "Optimized for fast load",
+        UX: "Improved conversion-ready layout",
+      },
+      features: [
+        "Complete theme identity overhaul",
+        "Custom hero and banners",
+        "Responsive product sections",
+        "Dynamic offers and promotions",
+        "Optimized Shopify Liquid templates",
+      ],
+      link: "https://anagadha.com/",
+      gallery: [
+        "/images/projects/theme/1.png",
+        "/images/projects/theme/2.png",
+      ],
+    },
   ];
 
   onMount(() => {
@@ -146,15 +233,7 @@ export default function Projects() {
     mm.add("(prefers-reduced-motion: no-preference)", () => {
       gsap.set([titleRef, ...projectRefs], { opacity: 0 });
       gsap.set(titleRef, { y: 30 });
-      gsap.set(projectRefs, { x: -50 });
-
-      gsap.to(cursorRef, {
-        opacity: 0,
-        duration: 0.8,
-        repeat: -1,
-        yoyo: true,
-        ease: "power2.inOut",
-      });
+      gsap.set(projectRefs, { y: 50, scale: 0.95 });
 
       ScrollTrigger.create({
         trigger: sectionRef,
@@ -172,9 +251,10 @@ export default function Projects() {
             projectRefs,
             {
               opacity: 1,
-              x: 0,
+              y: 0,
+              scale: 1,
               duration: 0.6,
-              stagger: 0.15,
+              stagger: 0.1,
             },
             "-=0.2"
           );
@@ -184,213 +264,324 @@ export default function Projects() {
       gsap.set(detailRefs, {
         height: 0,
         opacity: 0,
-        scaleY: 0,
-        transformOrigin: "top",
         overflow: "hidden",
       });
 
       const handleProjectClick = (index) => {
         if (expandedProject() === index) {
           setExpandedProject(null);
-          gsap.to(detailRefs[index], {
+
+          const tl = gsap.timeline();
+
+          tl.to(detailRefs[index], {
             height: 0,
-            scaleY: 0,
             opacity: 0,
             duration: 0.3,
             ease: "power2.inOut",
           });
+
+          tl.to(
+            projectRefs[index],
+            {
+              x: 0,
+              width: "auto",
+              duration: 0.5,
+              ease: "power3.inOut",
+            },
+            "-=0.1"
+          );
         } else {
           if (expandedProject() !== null) {
-            gsap.to(detailRefs[expandedProject()], {
+            const prevTl = gsap.timeline();
+            prevTl.to(detailRefs[expandedProject()], {
               height: 0,
-              scaleY: 0,
               opacity: 0,
               duration: 0.2,
               ease: "power2.inOut",
             });
+            prevTl.to(
+              projectRefs[expandedProject()],
+              {
+                x: 0,
+                width: "auto",
+                duration: 0.3,
+                ease: "power2.inOut",
+              },
+              "-=0.1"
+            );
           }
 
-          // Expand clicked project
           setExpandedProject(index);
-          gsap.to(detailRefs[index], {
-            height: "auto",
-            scaleY: 1,
-            opacity: 1,
-            duration: 0.5,
-            ease: "power3.out",
-          });
+
+          const isMobile = window.innerWidth < 768;
+          const isTablet = window.innerWidth < 1024;
+
+          let expandWidth,
+            translateX = 0;
+
+          if (isMobile) {
+            // Mobile: always full width, no translation needed
+            expandWidth = "100%";
+            translateX = 0;
+          } else if (isTablet) {
+            // Tablet: 2 columns
+            const isLastInRow = (index + 1) % 2 === 0;
+            expandWidth = "calc(200% + 24px)";
+
+            if (isLastInRow) {
+              // Last card in row - calculate distance to move left
+              translateX = "calc(-100% - 24px)";
+            } else {
+              // First card - no translation needed
+              translateX = 0;
+            }
+          } else {
+            // Desktop: 3 columns
+            const positionInRow = index % 3;
+            expandWidth = "calc(300% + 48px)";
+
+            if (positionInRow === 0) {
+              // First card - no translation needed
+              translateX = 0;
+            } else if (positionInRow === 1) {
+              // Middle card - move one column left
+              translateX = "calc(-100% - 24px)";
+            } else {
+              // Last card - move two columns left
+              translateX = "calc(-200% - 48px)";
+            }
+          }
+
+          const tl = gsap.timeline();
+          const cardRect = projectRefs[index].getBoundingClientRect();
+          const rowStartIndex = isMobile
+            ? index
+            : isTablet
+            ? index - (index % 2)
+            : index - (index % 3);
+
+          const firstColRect =
+            projectRefs[rowStartIndex].getBoundingClientRect();
+          const shiftPx = firstColRect.left - cardRect.left;
+
+          // Stage 1: Shift into first column position
+          if (shiftPx !== 0) {
+            tl.to(projectRefs[index], {
+              x: shiftPx,
+              duration: 0.4,
+              ease: "power3.inOut",
+            });
+          }
+
+          // Stage 2: Expand width from left edge
+          tl.to(
+            projectRefs[index],
+            {
+              width: expandWidth,
+              duration: 0.4,
+              ease: "power2.out",
+            },
+            shiftPx !== 0 ? "-=0.2" : "0"
+          );
+
+          // Stage 3: Show details
+          tl.to(
+            detailRefs[index],
+            {
+              height: "auto",
+              opacity: 1,
+              duration: 0.5,
+              ease: "power3.out",
+            },
+            "-=0.2"
+          );
         }
       };
 
-      // Add click listeners to project rows
       projectRefs.forEach((ref, index) => {
         if (ref) {
           ref.addEventListener("click", () => handleProjectClick(index));
         }
       });
+
+      const handleResize = () => {
+        if (expandedProject() !== null) {
+          const currentIndex = expandedProject();
+          gsap.set(projectRefs[currentIndex], { x: 0, width: "auto" });
+          gsap.set(detailRefs[currentIndex], { height: 0, opacity: 0 });
+          setExpandedProject(null);
+          setTimeout(() => handleProjectClick(currentIndex), 50);
+        }
+      };
+
+      window.addEventListener("resize", handleResize);
     });
 
     return () => {
       tl?.kill();
-      hoverTimeline?.kill();
       ScrollTrigger.getAll().forEach((st) => st.kill());
+      window.removeEventListener("resize", handleResize);
       mm.revert();
     };
   });
 
-  const getStatusColor = (status) => {
-    switch (status) {
-      case "active":
-        return "text-black/90";
-      case "building":
-        return "text-yellow-500";
-      case "shipped":
-        return "text-blue-500";
-      default:
-        return "text-gray-500";
-    }
-  };
-
-  const getStatusIcon = (status) => {
-    switch (status) {
-      case "active":
-        return "●";
-      case "building":
-        return "◐";
-      case "shipped":
-        return "✓";
-      default:
-        return "○";
-    }
-  };
-
   return (
     <section
       ref={(el) => (sectionRef = el)}
-      class="py-32  overflow-hidden"
+      class="py-32 overflow-hidden"
       id="projects_sec"
     >
-      <div class="max-w-4xl mx-auto px-6">
+      <div class="max-w-6xl mx-auto px-6">
         <div class="mb-12">
-          <div class="flex items-center mb-6">
-            <div class="flex space-x-2 mr-4">
-              <div class="w-3 h-3 rounded-full bg-red-500"></div>
-              <div class="w-3 h-3 rounded-full bg-yellow-500"></div>
-              <div class="w-3 h-3 rounded-full bg-green-500"></div>
-            </div>
-            <span class="text-gray-500 text-sm">~/projects</span>
-          </div>
+          <h2
+            ref={(el) => (titleRef = el)}
+            class="text-3xl font-bold mb-8 text-center"
+          >
+            My Projects
+          </h2>
 
-          <div class="border border-gray-800 bg-black/10 rounded-lg p-6">
-            <div class="flex items-center mb-4">
-              <span class="text-black/90">$</span>
-              <span class="ml-2 ">ls -la --projects</span>
-              <span ref={(el) => (cursorRef = el)} class="ml-1 text-black/90">
-                |
-              </span>
-            </div>
-
-            <h2 ref={(el) => (titleRef = el)} class="text-2xl mb-6">
-              # My Code, My{" "}
-              <span class="bg-white text-black font-bold border border-green-300 rounded-lg px-2">
-                Canvas
-              </span>
-            </h2>
-
-            {/* Project list */}
-            <div class="space-y-1">
-              <For each={projects}>
-                {(project, index) => (
-                  <div>
-                    <div
-                      ref={(el) => (projectRefs[index()] = el)}
-                      class={`flex items-center justify-between py-3 px-4 hover:bg-gray-900/10 rounded-lg transition-all duration-200 cursor-pointer group ${
-                        expandedProject() === index()
-                          ? "bg-gray-900/30 border-l-2 border-green-400"
-                          : ""
-                      }`}
-                    >
-                      <div class="flex items-center space-x-4">
-                        <span
-                          class={`${getStatusColor(project.status)} text-xs`}
-                        >
-                          {getStatusIcon(project.status)}
-                        </span>
-                        <span class=" group-hover:text-green-800 transition-colors">
-                          {project.name}
-                        </span>
-                        <span class="text-gray-800 text-sm">
-                          .{project.lang}
-                        </span>
+          {/* Project grid */}
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <For each={projects}>
+              {(project, index) => (
+                <div class="relative">
+                  <div
+                    ref={(el) => (projectRefs[index()] = el)}
+                    class={`relative bg-white rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 cursor-pointer border-2 ${
+                      expandedProject() === index()
+                        ? "border-blue-500 ring-2 ring-blue-200 shadow-2xl z-50"
+                        : "border-gray-100 hover:border-gray-200 z-10"
+                    }`}
+                  >
+                    {/* Main card content */}
+                    <div class="p-6 pb-4">
+                      <div class="flex items-center justify-between mb-4">
+                        <div class="w-16 h-16 rounded-lg flex items-center justify-center border-2 border-gray-200">
+                          <img
+                            src={project.artwork || `/api/placeholder/64/64`}
+                            alt={project.name}
+                            class="w-full h-12 object-contain rounded-md"
+                            onError={(e) => {
+                              e.target.style.display = "none";
+                              e.target.nextElementSibling.style.display =
+                                "flex";
+                            }}
+                          />
+                          <div class="w-12 h-12 bg-gray-200 rounded-md flex items-center justify-center text-gray-500 text-xl font-bold hidden">
+                            {project.name.charAt(0).toUpperCase()}
+                          </div>
+                        </div>
+                        <div
+                          class={`w-3 h-3 rounded-full ${
+                            project.status === "active"
+                              ? "bg-green-500"
+                              : project.status === "shipped"
+                              ? "bg-blue-500"
+                              : "bg-yellow-500"
+                          }`}
+                        ></div>
                       </div>
 
-                      <div class="flex items-center space-x-4 text-xs text-gray-500">
-                        <span class="hidden sm:inline">{project.commits}</span>
-                        <span class="text-gray-600">
-                          {expandedProject() === index() ? "▼" : "▶"}
-                        </span>
+                      <h3 class="text-xl font-semibold text-gray-900 mb-2 group-hover:text-blue-600 transition-colors">
+                        {project.name}
+                      </h3>
+
+                      <p class="text-sm text-gray-600 font-medium mb-3">
+                        {project.type}
+                      </p>
+
+                      <p class="text-gray-700 text-sm leading-relaxed">
+                        {project.description}
+                      </p>
+                    </div>
+
+                    {/* Expand indicator */}
+                    <div class="px-6 pb-4">
+                      <div class="flex items-center justify-between text-xs text-gray-500">
+                        <span>{project.commits} commits</span>
+                        <svg
+                          class={`w-4 h-4 transform transition-transform duration-300 ${
+                            expandedProject() === index()
+                              ? "rotate-180 text-blue-500"
+                              : "rotate-0 text-gray-400"
+                          }`}
+                          fill="none"
+                          stroke="currentColor"
+                          strokeWidth={2}
+                          viewBox="0 0 24 24"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            d="M19 9l-7 7-7-7"
+                          />
+                        </svg>
                       </div>
                     </div>
 
+                    {/* Expanded details - hidden by default */}
                     <div
                       ref={(el) => (detailRefs[index()] = el)}
-                      class="overflow-hidden mt-2 bg-black/20 border border-green-700/30 mx-2 mb-4 relative rounded-lg"
-                      style="height: 0; transform-origin: top; transform: scaleY(0); opacity: 0;"
+                      class="border-t border-gray-200 overflow-hidden"
+                      style="height: 0; opacity: 0;"
+                      onClick={(e) => e.stopPropagation()}
                     >
-                      {/* Terminal header */}
-                      <div class="bg-black/80 border-b border-green-700/20 px-4 py-2 flex flex-col md:flex-row gap-2 md:items-center justify-between rounded">
-                        <div class="flex items-center space-x-3">
-                          <div class="flex space-x-1">
-                            <div class="w-2 h-2 rounded-full bg-red-500"></div>
-                            <div class="w-2 h-2 rounded-full bg-yellow-500"></div>
-                            <div class="w-2 h-2 rounded-full bg-green-500"></div>
-                          </div>
-                          <span class="text-white font-bold text-xs">
-                            [PROJECT_ANALYSIS]
-                          </span>
-                        </div>
-                        <span class="text-white text-xs">
-                          {project.name}.{project.lang}
-                        </span>
-                      </div>
-
-                      <div class="p-6 text-sm space-y-6">
+                      <div class="p-6 space-y-6">
                         {/* Full description */}
-                        <div class="border-l-2 border-green-700/40 pl-4">
-                          <p class="text-black/90 text-xs mb-2">
-                            [DESCRIPTION]
-                          </p>
-                          <p class="text-black leading-relaxed">
+                        <div>
+                          <h4 class="text-lg font-semibold text-gray-900 mb-3">
+                            About
+                          </h4>
+                          <p class="text-gray-700 leading-relaxed">
                             {project.fullDescription}
                           </p>
                         </div>
 
-                        {/* Metrics grid */}
-                        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-                          <For each={Object.entries(project.metrics)}>
-                            {([key, value]) => (
-                              <div class="bg-black/60 border border-green-400/20 p-3 rounded">
-                                <div class="text-white text-xs uppercase mb-1">
-                                  {key}
-                                </div>
-                                <div class="text-white font-bold capitalize">
-                                  {value}
-                                </div>
-                              </div>
-                            )}
-                          </For>
-                        </div>
+                        {/* Gallery section */}
+                        {project.gallery && project.gallery.length > 0 && (
+                          <div>
+                            <h4 class="text-lg font-semibold text-gray-900 mb-3">
+                              Gallery
+                            </h4>
+                            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                              <For each={project.gallery}>
+                                {(image) => (
+                                  <div
+                                    class="relative group cursor-pointer overflow-hidden rounded-lg border border-gray-200 hover:border-blue-300 transition-all duration-300"
+                                    onClick={(e) => e.stopPropagation()}
+                                  >
+                                    <img
+                                      src={image}
+                                      alt={`${project.name} screenshot`}
+                                      class="w-full h-40 object-contain group-hover:scale-105 transition-transform duration-300"
+                                      onError={(e) => {
+                                        e.target.style.display = "none";
+                                        e.target.nextElementSibling.style.display =
+                                          "flex";
+                                      }}
+                                    />
+                                    <div class="hidden w-full h-32 bg-gray-100 items-center justify-center text-gray-400">
+                                      <span class="text-sm">
+                                        Image not found
+                                      </span>
+                                    </div>
+                                  </div>
+                                )}
+                              </For>
+                            </div>
+                          </div>
+                        )}
 
                         {/* Tech stack */}
                         <div>
-                          <p class="text-black/90 text-xs font-bold mb-3">
-                            [TECH_STACK]
-                          </p>
+                          <h4 class="text-lg font-semibold text-gray-900 mb-3">
+                            Tech Stack
+                          </h4>
                           <div class="flex flex-wrap gap-2">
                             <For each={project.tech}>
                               {(tech) => (
-                                <span class="px-3 py-1 bg-black/60 border border-green-400/20 text-white text-xs rounded ">
-                                  {tech.toLowerCase()}
+                                <span class="px-3 py-1 bg-blue-50 border border-blue-200 text-blue-700 text-sm rounded-full font-medium">
+                                  {tech}
                                 </span>
                               )}
                             </For>
@@ -399,60 +590,75 @@ export default function Projects() {
 
                         {/* Features */}
                         <div>
-                          <p class="text-black/90 text-xs font-bold mb-3">
-                            [FEATURES]
-                          </p>
-                          <div class="grid grid-cols-2 gap-2 text-xs">
+                          <h4 class="text-lg font-semibold text-gray-900 mb-3">
+                            Key Features
+                          </h4>
+                          <div class="grid grid-cols-1 md:grid-cols-2 gap-2">
                             <For each={project.features}>
                               {(feature) => (
                                 <div class="flex items-center space-x-2">
-                                  <span class="text-black/90">✓</span>
-                                  <span class="text-black/70">{feature}</span>
+                                  <span class="text-green-500 text-sm">✓</span>
+                                  <span class="text-gray-700 text-sm">
+                                    {feature}
+                                  </span>
                                 </div>
                               )}
                             </For>
                           </div>
                         </div>
 
+                        {/* Metrics */}
+                        {Object.keys(project.metrics).length > 0 && (
+                          <div>
+                            <h4 class="text-lg font-semibold text-gray-900 mb-3">
+                              Metrics
+                            </h4>
+                            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                              <For each={Object.entries(project.metrics)}>
+                                {([key, value]) => (
+                                  <div class="bg-gray-50 border border-gray-200 p-3 rounded-lg">
+                                    <div class="text-gray-500 text-xs uppercase font-medium mb-1">
+                                      {key}
+                                    </div>
+                                    <div class="text-gray-900 font-semibold">
+                                      {value}
+                                    </div>
+                                  </div>
+                                )}
+                              </For>
+                            </div>
+                          </div>
+                        )}
+
                         {/* Actions */}
-                        <div class="flex justify-between items-center pt-4 border-t border-gray-800">
-                          <div class="text-xs text-gray-500">
-                            <span class="text-black/90">{project.commits}</span>{" "}
+                        <div class="flex justify-between items-center pt-4 border-t border-gray-200">
+                          <div class="text-sm text-gray-500">
+                            <span class="font-medium">{project.commits}</span>{" "}
                             commits •
-                            <span class="text-black/90"> {project.status}</span>
+                            <span class="font-medium capitalize">
+                              {" "}
+                              {project.status}
+                            </span>
                           </div>
                           <a
                             href={project.link}
                             target="_blank"
                             rel="noopener noreferrer"
-                            class="inline-flex items-center space-x-2 bg-green-400/10 hover:bg-green-400/20 text-black/90 px-4 py-2 rounded border border-green-400/30 hover:border-green-400 transition-all text-xs group"
+                            class="inline-flex items-center space-x-2 bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg transition-all text-sm font-medium group"
                             onClick={(e) => e.stopPropagation()}
                           >
-                            <span>OPEN</span>
+                            <span>View Project</span>
                             <span class="group-hover:translate-x-1 transition-transform">
-                              ↗
+                              →
                             </span>
                           </a>
                         </div>
                       </div>
-
-                      {/* Scan lines effect */}
-                      <div class="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-green-400 to-transparent opacity-50"></div>
-                      <div class="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-green-400 to-transparent opacity-50"></div>
                     </div>
                   </div>
-                )}
-              </For>
-            </div>
-
-            {/* Terminal footer */}
-            <div class="mt-6 pt-4 border-t border-gray-800">
-              <div class="flex items-center text-gray-500 text-sm">
-                <span class="text-black/90">✓</span>
-                <span class="ml-2">3 repositories found</span>
-                <span class="ml-auto">last updated: just now</span>
-              </div>
-            </div>
+                </div>
+              )}
+            </For>
           </div>
         </div>
       </div>

@@ -17,9 +17,11 @@
   "dependencies": {
     "@iconify-icon/solid": "^3.0.0",
     "@solidjs/router": "^0.15.3",
+    "@supabase/supabase-js": "^2.55.0",
     "@tailwindcss/vite": "^4.1.11",
     "camera-controls": "^3.1.0",
     "gsap": "^3.13.0",
+    "nodemailer": "^7.0.5",
     "solid-js": "^1.9.5",
     "tailwindcss": "^4.1.11",
     "three": "^0.179.1"

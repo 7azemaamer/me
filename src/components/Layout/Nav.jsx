@@ -140,20 +140,23 @@ export default function Nav() {
 
   const links = [
     { title: "Home", href: "/" },
-    { title: "Reviews", href: "#reviews_sec" },
-    { title: "Contact Me", href: "#contact_sec" },
+    { title: "Blogs", href: "/blogs" },
+    { title: "About Me", href: "#about_sec" },
     { title: "Projects", href: "#projects_sec" },
+    { title: "Contact Me", href: "#contact_sec" },
   ];
 
   return (
     <nav class="fixed top-0 left-0 w-full flex justify-between items-center px-4 sm:px-8 py-4 sm:py-6 z-50 backdrop-blur-xs">
       {/* Logo - Responsive */}
       <div class="logo-container">
-        <div class="text-3xl sm:text-5xl uppercase font-quicksand">
-          <span class="text-4xl sm:text-6xl font-bold text-primary">H</span>
-          <span class="lowercase">a</span>z<span class="lowercase">e</span>
-          <span class="text-2xl sm:text-3xl font-semibold">m</span>
-        </div>
+        <a href="/">
+          <div class="text-3xl sm:text-5xl uppercase font-quicksand">
+            <span class="text-4xl sm:text-6xl font-bold text-primary">H</span>
+            <span class="lowercase">a</span>z<span class="lowercase">e</span>
+            <span class="text-2xl sm:text-3xl font-semibold">m</span>
+          </div>
+        </a>
       </div>
 
       {/* Buttons  */}
@@ -223,35 +226,38 @@ export default function Nav() {
               >
                 <a
                   class="social-icon hover:bg-gray-50 hover:rounded-full p-2 flex justify-center items-center"
-                  href="#"
+                  href="https://wa.me/201019329111"
+                  target="_blank"
                 >
                   <Icon
                     icon="ion:social-whatsapp"
                     width="32"
                     height="32"
-                    class="sm:w-[50px] sm:h-[50px]"
+                    class="sm:w-[40px] sm:h-[40px] flex justify-center items-center"
                   />
                 </a>
                 <a
                   class="social-icon hover:bg-gray-50 hover:rounded-full p-2 flex justify-center items-center"
-                  href="#"
+                  href="https://github.com/7azemaamer"
+                  target="_blank"
                 >
                   <Icon
                     icon="ion:social-github"
                     width="32"
                     height="32"
-                    class="sm:w-[50px] sm:h-[50px]"
+                    class="sm:w-[40px] sm:h-[40px] flex justify-center items-center"
                   />
                 </a>
                 <a
                   class="social-icon hover:bg-gray-50 hover:rounded-full p-2 flex justify-center items-center"
-                  href="#"
+                  href="https://x.com/zicoaamer"
+                  target="_blank"
                 >
                   <Icon
                     icon="mingcute:social-x-line"
                     width="32"
                     height="32"
-                    class="sm:w-[50px] sm:h-[50px]"
+                    class="sm:w-[40px] sm:h-[40px] flex justify-center items-center"
                   />
                 </a>
               </div>

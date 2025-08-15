@@ -1,4 +1,4 @@
-import { onMount, onCleanup, createSignal } from "solid-js";
+import { onMount, onCleanup, createSignal, Show } from "solid-js";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
@@ -7,6 +7,15 @@ gsap.registerPlugin(ScrollTrigger);
 export default function Contact() {
   let sectionRef, titleRef, ctaRef, planeRef, messageRef, formRef;
   let tl, planeAnimation;
+
+  // Form state
+  const [name, setName] = createSignal("");
+  const [email, setEmail] = createSignal("");
+  const [subject, setSubject] = createSignal("");
+  const [message, setMessage] = createSignal("");
+  const [loading, setLoading] = createSignal(false);
+  const [success, setSuccess] = createSignal(false);
+  const [error, setError] = createSignal("");
   const [isMessageSent, setIsMessageSent] = createSignal(false);
 
   onMount(() => {
@@ -112,50 +121,93 @@ export default function Contact() {
     );
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
-    setIsMessageSent(true);
+    // Clear previous states
+    setError("");
+    setSuccess(false);
+    setLoading(true);
 
-    gsap.to(planeRef, {
-      x: 200,
-      y: -100,
-      rotation: 25,
-      scale: 0.5,
-      duration: 1.5,
-      ease: "power2.inOut",
-    });
-
-    gsap.to(messageRef, {
-      scale: 1,
-      opacity: 1,
-      duration: 0.5,
-      ease: "back.out(1.7)",
-      delay: 0.8,
-    });
-
-    setTimeout(() => {
-      gsap.to(messageRef, {
-        scale: 0,
-        opacity: 0,
-        duration: 0.3,
+    try {
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          name: name(),
+          email: email(),
+          message: `Subject: ${subject()}\n\n${message()}`,
+        }),
       });
 
-      gsap.to(planeRef, {
-        x: 0,
-        y: 0,
-        rotation: 0,
-        scale: 1,
-        duration: 1,
-        ease: "power2.out",
-        delay: 0.5,
-      });
+      const data = await response.json();
 
-      setTimeout(() => {
-        setIsMessageSent(false);
-        startPlaneAnimation();
-      }, 1500);
-    }, 3000);
+      if (data.success) {
+        setSuccess(true);
+        setIsMessageSent(true);
+
+        // Clear form
+        setName("");
+        setEmail("");
+        setSubject("");
+        setMessage("");
+
+        // Animate plane flying away
+        gsap.to(planeRef, {
+          x: 200,
+          y: -100,
+          rotation: 25,
+          scale: 0.5,
+          duration: 1.5,
+          ease: "power2.inOut",
+        });
+
+        // Show success message
+        gsap.to(messageRef, {
+          scale: 1,
+          opacity: 1,
+          duration: 0.5,
+          ease: "back.out(1.7)",
+          delay: 0.8,
+        });
+
+        // Reset animations after success
+        setTimeout(() => {
+          gsap.to(messageRef, {
+            scale: 0,
+            opacity: 0,
+            duration: 0.3,
+          });
+
+          gsap.to(planeRef, {
+            x: 0,
+            y: 0,
+            rotation: 0,
+            scale: 1,
+            duration: 1,
+            ease: "power2.out",
+            delay: 0.5,
+          });
+
+          setTimeout(() => {
+            setIsMessageSent(false);
+            setSuccess(false);
+            startPlaneAnimation();
+          }, 1500);
+        }, 3000);
+      } else {
+        setError(data.error || "Failed to send message. Please try again.");
+      }
+    } catch (err) {
+      console.error("Error sending message:", err);
+      setError(
+        "Failed to send message. Please check your connection and try again."
+      );
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -187,21 +239,41 @@ export default function Contact() {
           class="max-w-2xl mx-auto"
         >
           <form onSubmit={handleSubmit} class="space-y-6">
+            {/* Error Message */}
+            <Show when={error()}>
+              <div class="bg-red-50 border border-red-200 rounded-2xl p-4 text-red-700 text-center">
+                {error()}
+              </div>
+            </Show>
+
+            {/* Success Message */}
+            <Show when={success()}>
+              <div class="bg-green-50 border border-green-200 rounded-2xl p-4 text-green-700 text-center">
+                Message sent successfully! I'll get back to you soon.
+              </div>
+            </Show>
+
             <div class="grid md:grid-cols-2 gap-6">
               <div>
                 <input
                   type="text"
                   placeholder="Your Name"
+                  value={name()}
+                  onInput={(e) => setName(e.target.value)}
                   required
-                  class="w-full px-4 py-4 border border-gray-200 rounded-2xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all bg-white/80 backdrop-blur-sm"
+                  disabled={loading()}
+                  class="w-full px-4 py-4 border border-gray-200 rounded-2xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all bg-white/80 backdrop-blur-sm disabled:opacity-50"
                 />
               </div>
               <div>
                 <input
                   type="email"
                   placeholder="Your Email"
+                  value={email()}
+                  onInput={(e) => setEmail(e.target.value)}
                   required
-                  class="w-full px-4 py-4 border border-gray-200 rounded-2xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all bg-white/80 backdrop-blur-sm"
+                  disabled={loading()}
+                  class="w-full px-4 py-4 border border-gray-200 rounded-2xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all bg-white/80 backdrop-blur-sm disabled:opacity-50"
                 />
               </div>
             </div>
@@ -210,7 +282,10 @@ export default function Contact() {
               <input
                 type="text"
                 placeholder="Project Subject"
-                class="w-full px-4 py-4 border border-gray-200 rounded-2xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all bg-white/80 backdrop-blur-sm"
+                value={subject()}
+                onInput={(e) => setSubject(e.target.value)}
+                disabled={loading()}
+                class="w-full px-4 py-4 border border-gray-200 rounded-2xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all bg-white/80 backdrop-blur-sm disabled:opacity-50"
               />
             </div>
 
@@ -218,51 +293,41 @@ export default function Contact() {
               <textarea
                 placeholder="Tell me about your project..."
                 rows="5"
+                value={message()}
+                onInput={(e) => setMessage(e.target.value)}
                 required
-                class="w-full px-4 py-4 border border-gray-200 rounded-2xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all resize-none bg-white/80 backdrop-blur-sm"
+                disabled={loading()}
+                class="w-full px-4 py-4 border border-gray-200 rounded-2xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all resize-none bg-white/80 backdrop-blur-sm disabled:opacity-50"
               ></textarea>
             </div>
 
             <div class="pt-4">
               <button
                 type="submit"
-                class="group relative overflow-hidden bg-black hover:bg-gray-800 text-white px-12 py-4 rounded-2xl font-medium transition-all duration-300 hover:scale-105 hover:shadow-xl"
-                disabled={isMessageSent()}
+                class="group relative overflow-hidden bg-black hover:bg-gray-800 text-white px-12 py-4 rounded-2xl font-medium transition-all duration-300 hover:scale-105 hover:shadow-xl disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100"
+                disabled={loading() || isMessageSent()}
               >
                 <span class="relative z-10 flex items-center space-x-2">
-                  <span>{isMessageSent() ? "Sending..." : "Send Message"}</span>
-                  <span class="group-hover:translate-x-1 transition-transform">
-                    →
+                  <span>
+                    {loading()
+                      ? "Sending..."
+                      : isMessageSent()
+                      ? "Sent!"
+                      : "Send Message"}
                   </span>
+                  <Show when={!loading()}>
+                    <span class="group-hover:translate-x-1 transition-transform">
+                      →
+                    </span>
+                  </Show>
+                  <Show when={loading()}>
+                    <div class="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
+                  </Show>
                 </span>
                 <div class="absolute inset-0 bg-gradient-to-r from-gray-600 to-black transform scale-x-0 group-hover:scale-x-100 transition-transform origin-left duration-300"></div>
               </button>
             </div>
           </form>
-
-          <div class="mt-16 pt-8 border-t border-gray-200">
-            <p class="text-gray-500 mb-6">Or reach out directly:</p>
-            <div class="flex flex-col sm:flex-row justify-center items-center space-y-4 sm:space-y-0 sm:space-x-8">
-              <a
-                href="mailto:contact@example.com"
-                class="flex items-center space-x-2 text-gray-600 hover:text-black transition-colors group"
-              >
-                <span>Email</span>
-              </a>
-              <a
-                href="tel:+1234567890"
-                class="flex items-center space-x-2 text-gray-600 hover:text-black transition-colors group"
-              >
-                <span>Phone</span>
-              </a>
-              <a
-                href="#"
-                class="flex items-center space-x-2 text-gray-600 hover:text-black transition-colors group"
-              >
-                <span>WhatsApp</span>
-              </a>
-            </div>
-          </div>
         </div>
       </div>
     </section>

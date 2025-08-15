@@ -88,13 +88,25 @@ export default function Footer() {
 
             {/* Links */}
             <div class="flex gap-6 text-sm text-gray-800 mt-auto  text-center font-bold">
-              <a href="#" class="hover:text-blue-900 transition-colors">
+              <a
+                href="https://github.com/7azemaamer"
+                target="_blank"
+                class="hover:text-blue-900 transition-colors"
+              >
                 GitHub
               </a>
-              <a href="#" class="hover:text-green-500 transition-colors">
+              <a
+                href="https://wa.me/201019329111"
+                target="_blank"
+                class="hover:text-green-500 transition-colors"
+              >
                 WhatsApp
               </a>
-              <a href="#" class="hover:text-red-600 transition-colors">
+              <a
+                href="mailto:zicoaamer@gmail.com"
+                target="_blank"
+                class="hover:text-red-600 transition-colors"
+              >
                 Gmail
               </a>
             </div>
