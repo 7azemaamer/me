@@ -35,9 +35,10 @@ export function Dashboard() {
 
       if (response.ok && data.success) {
         console.log("Authentication successful"); // Debug log
-        setAuthenticated(true);
         setError(""); // Clear any previous errors
         await loadArticles();
+        // Force authentication state change
+        setAuthenticated(true);
       } else {
         console.log("Authentication failed:", data); // Debug log
         setError(data.error || "Invalid PIN");
@@ -199,6 +200,7 @@ export function Dashboard() {
 
   // Login form
   if (!authenticated()) {
+    console.log("Rendering login form");  
     return (
       <div class="min-h-screen bg-gray-50 flex items-center justify-center">
         <div class="max-w-md w-full space-y-8">
@@ -238,6 +240,7 @@ export function Dashboard() {
     );
   }
 
+  console.log("Rendering dashboard");
   return (
     <div class="min-h-screen bg-gray-50">
       {/* Header */}
