@@ -115,7 +115,7 @@ export default function Skills() {
     orbitTl = gsap.timeline({ repeat: -1 });
 
     skillGroups.forEach((group, groupIndex) => {
-      const groupRadius = 100 + groupIndex * 35;
+      const groupRadius = 120 + groupIndex * 50;
       const groupSpeed = 20 + groupIndex * 5;
       const direction = groupIndex % 2 === 0 ? 1 : -1;
 
@@ -172,7 +172,7 @@ export default function Skills() {
           The Tools I Use
         </h2>
 
-        <div class="relative flex justify-center items-center min-h-[500px]">
+        <div class="relative flex justify-center items-center min-h-[600px]">
           <For each={skillGroups}>
             {(group, groupIndex) => (
               <For each={group.skills}>
@@ -182,14 +182,14 @@ export default function Skills() {
                       .slice(0, groupIndex())
                       .reduce((sum, g) => sum + g.skills.length, 0) +
                     skillIndex();
-                  const groupRadius = 100 + groupIndex() * 35;
+                  const groupRadius = 120 + groupIndex() * 50;
                   const angleStep = 360 / group.skills.length;
                   const angle = skillIndex() * angleStep + groupIndex() * 25;
 
                   return (
                     <div
                       ref={(el) => (skillRefs[totalSkillIndex] = el)}
-                      class={`absolute ${group.color}  text-xs bg-black px-3 py-1.5 rounded-full border border-current/30 backdrop-blur-sm cursor-pointer hover:scale-110 transition-all group`}
+                      class={`absolute ${group.color} text-sm bg-black px-4 py-2 rounded-full border border-current/30 backdrop-blur-sm cursor-pointer hover:scale-110 transition-all group z-10`}
                       style={`
                         left: calc(50% + ${
                           Math.cos((angle * Math.PI) / 180) * groupRadius
@@ -216,7 +216,7 @@ export default function Skills() {
 
           <For each={skillGroups}>
             {(group, index) => {
-              const radius = 100 + index() * 35;
+              const radius = 120 + index() * 50;
               return (
                 <div
                   class={`absolute rounded-full border opacity-10 ${group.color.replace(

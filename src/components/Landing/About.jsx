@@ -13,15 +13,31 @@ export default function About() {
   let tl;
 
   const personalInfo = [
-    { label: "Name", value: "Hazem Aamer" },
-    { label: "Role", value: "MERN Stack Developer" },
+    { label: "Name", value: "Hazem Aamer", type: "text" },
+    { label: "Role", value: "MERN Stack Developer", type: "text" },
     {
       label: "Location",
-      value: "Egypt (open to remote or relocation in Europe)",
+      value: "Egypt (gonna relecote soon isa)",
+      type: "text",
     },
-    { label: "Email", value: "zicoaaamer@gmail.com" },
-    { label: "LinkedIn", value: "linkedin.com/in/hazemaamer" },
-    { label: "GitHub", value: "github.com/7azemaamer" },
+    {
+      label: "Email",
+      value: "zicoaaamer@gmail.com",
+      type: "link",
+      href: "mailto:zicoaaamer@gmail.com",
+    },
+    {
+      label: "LinkedIn",
+      value: "linkedin.com/in/hazemaamer",
+      type: "link",
+      href: "https://linkedin.com/in/hazemaamer",
+    },
+    {
+      label: "GitHub",
+      value: "github.com/7azemaamer",
+      type: "link",
+      href: "https://github.com/7azemaamer",
+    },
   ];
 
   const skills = {
@@ -139,12 +155,23 @@ export default function About() {
                 {(info, index) => (
                   <div
                     ref={(el) => (infoRefs[index()] = el)}
-                    class="flex justify-between items-center py-3 border-b border-gray-100 last:border-b-0"
+                    class="flex justify-between items-center py-3 border-b border-gray-100 last:border-b-0 group"
                   >
                     <span class="text-gray-600 font-medium">{info.label}:</span>
-                    <span class="text-gray-900 text-right max-w-xs">
-                      {info.value}
-                    </span>
+                    {info.type === "link" ? (
+                      <a
+                        href={info.href}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        class="text-blue-600 hover:text-blue-800 text-right max-w-xs transition-all duration-300 hover:underline"
+                      >
+                        {info.value}
+                      </a>
+                    ) : (
+                      <span class="text-gray-900 text-right max-w-xs">
+                        {info.value}
+                      </span>
+                    )}
                   </div>
                 )}
               </For>
@@ -257,9 +284,7 @@ export default function About() {
                       <p class="text-gray-700">10+ projects delivered</p>
                     </div>
                     <div>
-                      <p class="text-gray-800 font-bold">
-                        Spe-plus (Ongoing)
-                      </p>
+                      <p class="text-gray-800 font-bold">Spe-plus (Ongoing)</p>
                       <p class="text-gray-700">WhatsApp & social automation</p>
                     </div>
                   </div>

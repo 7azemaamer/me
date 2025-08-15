@@ -69,7 +69,8 @@ export default function Footer() {
                 <span class="font-bold">role:</span> "Software Engineer"
               </div>
               <div>
-                <span class="font-bold">status:</span> "Available for projects"
+                <span class="font-bold">status:</span> "Available for projects
+                or contracts"
               </div>
             </div>
           </div>

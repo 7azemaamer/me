@@ -31,14 +31,19 @@ export function Dashboard() {
       });
 
       const data = await response.json();
+      console.log("API Response:", data); // Debug log
 
-      if (data.success) {
+      if (response.ok && data.success) {
+        console.log("Authentication successful"); // Debug log
         setAuthenticated(true);
-        loadArticles();
+        setError(""); // Clear any previous errors
+        await loadArticles();
       } else {
-        setError("Invalid PIN");
+        console.log("Authentication failed:", data); // Debug log
+        setError(data.error || "Invalid PIN");
       }
     } catch (err) {
+      console.error("Authentication error:", err); // Debug log
       setError("Failed to authenticate");
     } finally {
       setLoading(false);
@@ -48,8 +53,10 @@ export function Dashboard() {
   // Load articles
   const loadArticles = async () => {
     try {
+      console.log("Loading articles..."); // Debug log
       const response = await fetch("/api/list-blogs");
       const data = await response.json();
+      console.log("Articles response:", data); // Debug log
       if (data.success) {
         setArticles(data.data);
       }
@@ -186,6 +193,9 @@ export function Dashboard() {
       setSlug(newSlug);
     }
   });
+
+  // Debug log
+  console.log("Current authenticated state:", authenticated());
 
   // Login form
   if (!authenticated()) {

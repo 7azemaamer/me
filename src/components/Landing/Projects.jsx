@@ -447,10 +447,10 @@ export default function Projects() {
                 <div class="relative">
                   <div
                     ref={(el) => (projectRefs[index()] = el)}
-                    class={`relative bg-white rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 cursor-pointer border-2 ${
+                    class={`relative bg-white rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 cursor-pointer border-2 group ${
                       expandedProject() === index()
                         ? "border-blue-500 ring-2 ring-blue-200 shadow-2xl z-50"
-                        : "border-gray-100 hover:border-gray-200 z-10"
+                        : "border-gray-100 hover:border-blue-300 hover:shadow-xl transform hover:-translate-y-1 z-10"
                     }`}
                   >
                     {/* Main card content */}
@@ -482,7 +482,7 @@ export default function Projects() {
                         ></div>
                       </div>
 
-                      <h3 class="text-xl font-semibold text-gray-900 mb-2 group-hover:text-blue-600 transition-colors">
+                      <h3 class="text-xl font-semibold text-gray-900 mb-2 group-hover:text-blue-600 transition-colors duration-300">
                         {project.name}
                       </h3>
 
@@ -499,23 +499,28 @@ export default function Projects() {
                     <div class="px-6 pb-4">
                       <div class="flex items-center justify-between text-xs text-gray-500">
                         <span>{project.commits} commits</span>
-                        <svg
-                          class={`w-4 h-4 transform transition-transform duration-300 ${
-                            expandedProject() === index()
-                              ? "rotate-180 text-blue-500"
-                              : "rotate-0 text-gray-400"
-                          }`}
-                          fill="none"
-                          stroke="currentColor"
-                          strokeWidth={2}
-                          viewBox="0 0 24 24"
-                        >
-                          <path
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            d="M19 9l-7 7-7-7"
-                          />
-                        </svg>
+                        <div class="flex items-center gap-2">
+                          <span class="text-xs text-gray-400 group-hover:text-blue-500 transition-colors duration-300">
+                            Click to expand
+                          </span>
+                          <svg
+                            class={`w-4 h-4 transform transition-all duration-300 group-hover:text-blue-500 ${
+                              expandedProject() === index()
+                                ? "rotate-180 text-blue-500"
+                                : "rotate-0 text-gray-400"
+                            }`}
+                            fill="none"
+                            stroke="currentColor"
+                            strokeWidth={2}
+                            viewBox="0 0 24 24"
+                          >
+                            <path
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              d="M19 9l-7 7-7-7"
+                            />
+                          </svg>
+                        </div>
                       </div>
                     </div>
 
