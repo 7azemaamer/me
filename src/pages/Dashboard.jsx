@@ -31,20 +31,25 @@ export function Dashboard() {
       });
 
       const data = await response.json();
-      console.log("API Response:", data); // Debug log
+      console.log("API Response:", data);
 
       if (response.ok && data.success) {
-        console.log("Authentication successful"); // Debug log
-        setError(""); // Clear any previous errors
-        await loadArticles();
-        // Force authentication state change
+        console.log("Authentication successful");
+        setError(""); 
+
         setAuthenticated(true);
+        console.log(
+          "Set authenticated to true, current value:",
+          authenticated()
+        );
+
+        await loadArticles();
       } else {
-        console.log("Authentication failed:", data); // Debug log
+        console.log("Authentication failed:", data);
         setError(data.error || "Invalid PIN");
       }
     } catch (err) {
-      console.error("Authentication error:", err); // Debug log
+      console.error("Authentication error:", err);
       setError("Failed to authenticate");
     } finally {
       setLoading(false);
@@ -54,10 +59,10 @@ export function Dashboard() {
   // Load articles
   const loadArticles = async () => {
     try {
-      console.log("Loading articles..."); // Debug log
+      console.log("Loading articles...");
       const response = await fetch("/api/list-blogs");
       const data = await response.json();
-      console.log("Articles response:", data); // Debug log
+      console.log("Articles response:", data);
       if (data.success) {
         setArticles(data.data);
       }
@@ -195,12 +200,15 @@ export function Dashboard() {
     }
   });
 
-  // Debug log
+  createEffect(() => {
+    console.log("Authentication state changed:", authenticated());
+  });
+
   console.log("Current authenticated state:", authenticated());
 
   // Login form
   if (!authenticated()) {
-    console.log("Rendering login form");  
+    console.log("Rendering login form");
     return (
       <div class="min-h-screen bg-gray-50 flex items-center justify-center">
         <div class="max-w-md w-full space-y-8">
